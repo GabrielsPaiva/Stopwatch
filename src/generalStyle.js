@@ -17,16 +17,13 @@ export const Div = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 600px;
-  height: 550px;
-  margin-left: 2.8em;
 `
 export const SecondsDisplay = styled.h1`
 font-size: 45px;
 `
 export const ButtonsDiv = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content: center;
 align-items: flex-end;
 width: 50%;
 margin-top: 3em;
@@ -34,6 +31,7 @@ margin-top: 3em;
 export const StartButton = styled.img`
 cursor: pointer;
 height: 100%;
+margin: 0 1em 0 1em;
 `
 export const StopButton = styled.img`
 cursor: pointer;
