@@ -23,7 +23,8 @@ export default class App extends React.Component {
         mins: 0,
         secs: 0,
         ms: 0,
-        totalTime: "00 : 00 : 00"
+        totalTime: "00 : 00 : 00",
+        isButtonDisabled: false
     };
 
     componentDidUpdate(){
@@ -45,6 +46,8 @@ export default class App extends React.Component {
 }
 
     startCount = () => {
+        this.setState({isButtonDisabled: true})
+
         const interval = setInterval(() => {
                 this.setState({
                     ms: this.state.ms + 1,
@@ -52,13 +55,18 @@ export default class App extends React.Component {
                 })
         }, 10)
 
+
+        // Pause and stop functions
+
         this.clear = () => {
             clearInterval(interval)
+            this.setState({isButtonDisabled: false})
         }
         this.reset = () => {
             clearInterval(interval)
             this.setState({ mins: 0, secs: 0, ms: 0, totalTime: "00 : 00 : 00" })
             document.title = "Melhor Stopwatch Ever"
+            this.setState({isButtonDisabled: false})
         }
     }
 
@@ -70,7 +78,7 @@ export default class App extends React.Component {
                     <S.SecondsDisplay>{this.state.totalTime}</S.SecondsDisplay>
                     <S.ButtonsDiv>
                         <S.ResetButton src={resetButton} alt="circulo azul verde com uma seta circular" onClick={this.reset}/>
-                        <S.StartButton src={playButton} alt="circulo azul com um triângulo virado pra direita no meio" onClick={this.startCount}/>
+                        <S.StartButton src={playButton} alt="circulo azul com um triângulo virado pra direita no meio" onClick={() => {if(!this.state.isButtonDisabled){return this.startCount()}}}/>
                         <S.StopButton src={pauseButton} alt="circulo azul com um simbolo de pause " onClick={this.clear}/>
                     </S.ButtonsDiv>
                 </S.Div>
