@@ -32,16 +32,16 @@ export default class App extends React.Component {
             document.title = this.state.totalTime
         }
         if(this.state.ms === 100){
-            this.setState({
-                ms: this.state.ms / 100,
-                secs: this.state.secs + 1
-            })
+            this.setState( prevState => ({
+                ms: prevState.ms / 100,
+                secs: prevState.secs + 1
+            }))
         }
         if(this.state.secs === 60){
-            this.setState({
-                secs: this.state.secs / 60,
-                mins: this.state.mins + 1
-            })
+            this.setState( prevState => ({
+                secs: prevState.secs / 60,
+                mins: prevState.mins + 1
+            }))
     }
 }
 
@@ -49,10 +49,10 @@ export default class App extends React.Component {
         this.setState({isButtonDisabled: true})
 
         const interval = setInterval(() => {
-                this.setState({
-                    ms: this.state.ms + 1,
-                    totalTime: `${this.state.mins < 10 ? "0" + this.state.mins : this.state.mins} : ${this.state.secs < 10 ? "0" + this.state.secs : this.state.secs} : ${this.state.ms < 10 ? "0" + this.state.ms : this.state.ms}`
-                })
+                this.setState( prevState => ({
+                    ms: prevState.ms + 1,
+                    totalTime: `${prevState.mins < 10 ? "0" + prevState.mins : prevState.mins} : ${prevState.secs < 10 ? "0" + prevState.secs : prevState.secs} : ${prevState.ms < 10 ? "0" + prevState.ms : prevState.ms}`
+                }))
         }, 10)
 
 
